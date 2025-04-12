@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Membros da Igreja</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+
+    form {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      max-width: 450px;
+      width: 100%;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333333;
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 16px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+      transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
+    }
+
+    input:focus {
+      border-color: #4CAF50;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+      background-color: #f9fff9;
+    }
+
+    input:hover {
+      border-color: #4CAF50;
+    }
+
+    button {
+      width: 100%;
+      background: linear-gradient(to right, #4CAF50, #2e7d32);
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(to right, #2196F3, #1565C0);
+    }
+
+    @media (max-width: 500px) {
+      form {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+
+      input, button {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <form action="https://api.sheetmonkey.io/form/8EypppLNoFE54GsKyqn8of" method="POST">
+    <h1>Banco de Dados Bethel</h1>
+    <label>Nome:
+      <input name="nome" required>
+    </label>
+    <label>Idade:
+      <input name="idade" type="number" required>
+    </label>
+    <label>Morada:
+      <input name="morada" required>
+    </label>
+    <label>Telefone:
+      <input name="telefone" required>
+    </label>
+    <label>Grupo Coral:
+      <input name="grupo" required>
+    </label>
+    <button type="submit">Submeter</button>
+  </form>
+</body>
+</html>
