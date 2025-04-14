@@ -20,18 +20,50 @@
       padding: 20px;
     }
 
-    form {
-      background-color: #ffffff;
-      padding: 30px;
-      border-radius: 12px;
+    .container {
+      display: flex;
+      background-color: white;
+      border-radius: 20px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      max-width: 450px;
+      overflow: hidden;
+      max-width: 900px;
       width: 100%;
     }
 
-    h1 {
+    .left {
+      background: linear-gradient(135deg, #56CCF2, #2F80ED);
+      color: white;
+      padding: 40px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      color: #333333;
+    }
+
+    .left h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .left p {
+      font-style: italic;
+      font-size: 16px;
+    }
+
+    .right {
+      padding: 40px;
+      flex: 1;
+    }
+
+    form {
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
       margin-bottom: 24px;
     }
 
@@ -79,40 +111,78 @@
       background: linear-gradient(to right, #2196F3, #1565C0);
     }
 
-    @media (max-width: 500px) {
-      form {
-        padding: 20px;
+    #success-message {
+      display: none;
+      text-align: center;
+      padding: 20px;
+      background-color: #e0f7fa;
+      border-radius: 10px;
+      color: #00796B;
+      margin-top: 20px;
+      font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
       }
 
-      h1 {
-        font-size: 20px;
-      }
-
-      input, button {
-        font-size: 14px;
+      .left, .right {
+        width: 100%;
+        padding: 30px;
       }
     }
   </style>
 </head>
 <body>
-  <form action="https://api.sheetmonkey.io/form/8EypppLNoFE54GsKyqn8of" method="POST">
-    <h1>Banco de Dados Bethel</h1>
-    <label>Nome:
-      <input name="nome" required>
-    </label>
-    <label>Idade:
-      <input name="idade" type="number" required>
-    </label>
-    <label>Morada:
-      <input name="morada" required>
-    </label>
-    <label>Telefone:
-      <input name="telefone" required>
-    </label>
-    <label>Grupo Coral:
-      <input name="grupo" required>
-    </label>
-    <button type="submit">Submeter</button>
-  </form>
+  <div class="container">
+    <div class="left">
+      <h1>Bem-vindo(a)!</h1>
+      <p>"Assim nós, que somos muitos, somos um só corpo em Cristo, e individualmente uns dos outros." – Romanos 12:5</p>
+    </div>
+    <div class="right">
+      <form id="registroForm" action="https://api.sheetmonkey.io/form/8EypppLNoFE54GsKyqn8of" method="POST">
+        <h2>Banco de Dados Bethel</h2>
+        <label>Nome:
+          <input name="nome" required>
+        </label>
+        <label>Idade:
+          <input name="idade" type="number" required>
+        </label>
+        <label>Morada:
+          <input name="morada" required>
+        </label>
+        <label>Telefone:
+          <input name="telefone" required>
+        </label>
+        <label>Grupo Coral:
+          <input name="grupo" required>
+        </label>
+        <button type="submit">Submeter</button>
+      </form>
+      <div id="success-message">
+        <h3>🎉 Obrigado por se registrar!</h3>
+        <p>"A graça do Senhor Jesus Cristo seja com o vosso espírito." – Filipenses 4:23</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('registroForm');
+    const successMessage = document.getElementById('success-message');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+      fetch(form.action, {
+        method: form.method,
+        body: formData
+      }).then(() => {
+        form.reset();
+        form.style.display = 'none';
+        successMessage.style.display = 'block';
+      });
+    });
+  </script>
 </body>
 </html>
