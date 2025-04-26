@@ -1,168 +1,263 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login e Cadastro</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Cadastro de Membro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Estilos adicionais para o modal */
-      /*  .modal {
-            display: none;
-            position: fixed;
-            z-index: 10;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 500px;
+        /* Estilos adicionais para reações */
+        .reaction-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
             border-radius: 0.5rem;
-        }
-        .close-button {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close-button:hover,
-        .close-button:focus {
-            color: black;
-            text-decoration: none;
+            background-color: #fff;
             cursor: pointer;
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+            font-size: 0.875rem;
+        }
+
+        .reaction-button:hover {
+            background-color: #eee;
+            transform: scale(1.05);
+        }
+
+        .reaction-icon {
+            width: 1rem;
+            height: 1rem;
+        }
+
+        .reactions-container {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        /* Estilos para campos de múltipla escolha */
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .checkbox-group label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
     </style>
 </head>
-<body class="bg-gray-100 h-screen flex items-center justify-center">
-    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <h2 class="block text-gray-700 text-xl font-bold mb-6 text-center">Login</h2>
-        <form id="loginForm" class="mb-4">
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                    Nome de Usuário
-                </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Seu nome de usuário" required>
+<body class="bg-gray-100 p-6">
+    <div class="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-lg">
+        <h1 class="text-3xl font-bold text-blue-700 mb-6 text-center">Formulário de Cadastro de Membro</h1>
+        
+        <form action="https://api.sheetmonkey.io/form/8EypppLNoFE54GsKyqn8of" method="POST" class="space-y-6">
+
+            <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold">Nome Completo</label>
+                    <input type="text" name="Nome" required placeholder="Digite seu nome completo"
+                        class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold">Email</label>
+                    <input type="email" name="Email" required placeholder="Digite seu email"
+                        class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+                </div>
             </div>
-            <div class="mb-6">
-                <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-                    Senha
-                </label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Sua senha" required>
+
+            <div class="grid md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-sm font-medium">Telefone Principal</label>
+                    <input type="tel" name="Telefone Principal" placeholder="(xx) xxxxx-xxxx"
+                        class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium">Telefone Secundário</label>
+                    <input type="tel" name="Telefone Secundário" placeholder="(xx) xxxxx-xxxx"
+                        class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium">Contato de Emergência</label>
+                    <input type="tel" name="Contato de Emergência" placeholder="(xx) xxxxx-xxxx"
+                        class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+                </div>
             </div>
-            <div class="flex items-center justify-between">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                    Entrar
+
+            <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold">Bairro</label>
+                    <input type="text" name="Bairro" required placeholder="Digite o bairro"
+                        class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold">Cidade</label>
+                    <input type="text" name="Cidade" required placeholder="Digite a cidade"
+                        class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold">Data de Nascimento</label>
+                    <input type="date" name="Data de Nascimento"
+                        class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold">Estado Civil</label>
+                    <select name="Estado Civil"
+                        class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
+                        <option value="">Selecione</option>
+                        <option value="Solteiro(a)">Solteiro(a)</option>
+                        <option value="Casado(a)">Casado(a)</option>
+                        <option value="Divorciado(a)">Divorciado(a)</option>
+                        <option value="Viúvo(a)">Viúvo(a)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold">Nível de Escolaridade</label>
+                    <select name="Nível de Escolaridade"
+                        class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
+                        <option value="">Selecione</option>
+                        <option value="Fundamental Incompleto">Fundamental Incompleto</option>
+                        <option value="Fundamental Completo">Fundamental Completo</option>
+                        <option value="Médio Incompleto">Médio Incompleto</option>
+                        <option value="Médio Completo">Médio Completo</option>
+                        <option value="Superior Incompleto">Superior Incompleto</option>
+                        <option value="Superior Completo">Superior Completo</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold">Profissão</label>
+                    <input type="text" name="Profissão" placeholder="Digite sua profissão"
+                        class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold">Gênero</label>
+                    <select name="Gênero" required
+                        class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
+                        <option value="">Selecione</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Feminino">Feminino</option>
+                        <option value="Outro">Outro</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold">Ministério que pertence (Sede ou Filial)</label>
+                    <input type="text" name="Ministério" placeholder="Ex: Ministério Esperança (Sede - Zona Norte)"
+                        class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold">Instagram</label>
+                    <input type="text" name="Instagram" placeholder="@seudominio"
+                        class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold">Facebook</label>
+                    <input type="text" name="Facebook" placeholder="Perfil do Facebook"
+                        class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold">Data da Conversão</label>
+                    <input type="date" name="Data da Conversão"
+                        class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold">Como Conheceu a Igreja?</label>
+                    <select name="Como Conheceu a Igreja"
+                        class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
+                        <option value="">Selecione</option>
+                        <option value="Visita de um membro">Visita de um membro</option>
+                        <option value="Culto público">Culto público</option>
+                        <option value="Amigo/Familiar">Amigo/Familiar</option>
+                        <option value="Redes sociais">Redes sociais</option>
+                        <option value="Outro">Outro</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold">Interesses e Talentos (para ministérios)</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="Interesses[]" value="Música"> Música</label>
+                    <label><input type="checkbox" name="Interesses[]" value="Louvor"> Louvor</label>
+                    <label><input type="checkbox" name="Interesses[]" value="Ensino"> Ensino (Escola Bíblica)</label>
+                    <label><input type="checkbox" name="Interesses[]" value="Evangelismo"> Evangelismo</label>
+                    <label><input type="checkbox" name="Interesses[]" value="Ação Social"> Ação Social</label>
+                    <label><input type="checkbox" name="Interesses[]" value="Infantil"> Ministério Infantil</label>
+                    <label><input type="checkbox" name="Interesses[]" value="Jovens"> Ministério de Jovens</label>
+                    <label><input type="checkbox" name="Interesses[]" value="Homens"> Ministério de Homens</label>
+                    <label><input type="checkbox" name="Interesses[]" value="Mulheres"> Ministério de Mulheres</label>
+                    <label><input type="checkbox" name="Interesses[]" value="Comunicação"> Comunicação/Mídia</label>
+                    <label><input type="checkbox" name="Interesses[]" value="Artes Cênicas"> Artes Cênicas</label>
+                    <label><input type="checkbox" name="Interesses[]" value="Outro"> Outro (especifique na história)</label>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold">Conte a sua história de conversão</label>
+                <textarea name="História de Conversão" rows="5" required
+                    class="w-full p-3 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    placeholder="Descreva sua jornada de fé..."></textarea>
+            </div>
+
+            <div class="reactions-container">
+                <label class="block text-sm font-semibold mb-2 text-center">Como você se sente ao preencher este formulário?</label>
+                <div>
+                    <button type="button" class="reaction-button" onclick="handleReaction('alegre')">
+                        <img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f600.png" alt="Alegre" class="reaction-icon">
+                        Alegre
+                    </button>
+                    <button type="button" class="reaction-button" onclick="handleReaction('animado')">
+                        <img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f917.png" alt="Animado" class="reaction-icon">
+                        Animado
+                    </button>
+                    <button type="button" class="reaction-button" onclick="handleReaction('grato')">
+                        <img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f64f.png" alt="Grato" class="reaction-icon">
+                        Grato
+                    </button>
+                    <button type="button" class="reaction-button" onclick="handleReaction('motivado')">
+                        <img src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/72x72/1f4aa.png" alt="Motivado" class="reaction-icon">
+                        Motivado
+                    </button>
+                    <input type="hidden" name="Reacao" id="reactionInput">
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button type="submit"
+                    class="w-full md:w-1/2 bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold py-4 px-6 rounded-xl transition duration-200">
+                    Cadastrar
                 </button>
-                <a href="#" class="inline-block align-baseline font-semibold text-sm text-blue-500 hover:text-blue-800" id="signupLink">
-                    Criar conta
-                </a>
             </div>
-            <div id="loginMessage" class="mt-4 text-center text-sm text-gray-600"></div>
         </form>
     </div>
 
-    <div id="signupModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" onclick="closeSignupModal()">&times;</span>
-            <h2 class="block text-gray-700 text-xl font-bold mb-6 text-center">Criar Conta</h2>
-            <form id="signupForm">
-                <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="newUsername">
-                        Nome de Usuário
-                    </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="newUsername" type="text" placeholder="Novo nome de usuário" required>
-                </div>
-                <div class="mb-6">
-                    <label class="block text-gray-700 text-sm font-bold mb-2" for="newPassword">
-                        Senha
-                    </label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="newPassword" type="password" placeholder="Nova senha" required>
-                </div>
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                    Criar Conta
-                </button>
-                <div id="signupMessage" class="mt-4 text-center text-sm text-green-600"></div>
-            </form>
-        </div>
-    </div>
-
     <script>
-        const loginForm = document.getElementById('loginForm');
-        const signupModal = document.getElementById('signupModal');
-        const signupFormElement = document.getElementById('signupForm');
-        const signupLink = document.getElementById('signupLink');
-        const loginMessageDiv = document.getElementById('loginMessage');
-        const signupMessageDiv = document.getElementById('signupMessage');
-
-        signupLink.addEventListener('click', openSignupModal);
-
-        function openSignupModal() {
-            signupModal.style.display = "block";
-        }
-
-        function closeSignupModal() {
-            signupModal.style.display = "none";
-            signupFormElement.reset();
-            signupMessageDiv.textContent = '';
-        }
-
-        window.onclick = function(event) {
-            if (event.target == signupModal) {
-                closeSignupModal();
+        function handleReaction(reaction) {
+            document.getElementById('reactionInput').value = reaction;
+            const buttons = document.querySelectorAll('.reaction-button');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-blue-200', 'border-blue-400', 'font-semibold');
+            });
+            const selectedButton = document.querySelector(`.reaction-button:has(img[alt="${reaction.charAt(0).toUpperCase() + reaction.slice(1)}"])`);
+            if (selectedButton) {
+                selectedButton.classList.add('bg-blue-200', 'border-blue-400', 'font-semibold');
             }
-        }
-
-        loginForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            loginMessageDiv.textContent = 'Aguarde...';
-            google.script.run.withSuccessHandler(onLoginSuccess).withFailureHandler(onLoginFailure).login(username, password);
-        });
-
-        signupFormElement.addEventListener('submit', function(event) {
-            event.preventDefault();
-            const newUsername = document.getElementById('newUsername').value;
-            const newPassword = document.getElementById('newPassword').value;
-            signupMessageDiv.textContent = 'Aguarde...';
-            google.script.run.withSuccessHandler(onSignupSuccess).withFailureHandler(onSignupFailure).signup(newUsername, newPassword);
-        });
-
-        function onLoginSuccess(data) {
-            if (data.success) {
-                loginMessageDiv.textContent = 'Login realizado com sucesso!';
-                window.location.href = 'dashboard.html';
-            } else {
-                loginMessageDiv.textContent = 'Erro ao fazer login: ' + data.error;
-            }
-        }
-
-        function onLoginFailure(error) {
-            console.error('Erro:', error);
-            loginMessageDiv.textContent = 'Ocorreu um erro ao tentar fazer login.';
-        }
-
-        function onSignupSuccess(data) {
-            if (data.success) {
-                signupMessageDiv.textContent = 'Conta criada com sucesso! Redirecionando para o login...';
-                setTimeout(closeSignupModal, 1500);
-                loginForm.reset();
-            } else {
-                signupMessageDiv.textContent = 'Erro ao criar conta: ' + data.error;
-            }
-        }
-
-        function onSignupFailure(error) {
-            console.error('Erro:', error);
-            signupMessageDiv.textContent = 'Ocorreu um erro ao tentar criar a conta.';
         }
     </script>
 </body>
